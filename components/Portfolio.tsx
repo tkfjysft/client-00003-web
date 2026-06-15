@@ -2,9 +2,10 @@
 
 import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import Section from "@/components/Section";
 import CustomImage from "@/components/CustomImage";
+import dynamic from 'next/dynamic';
 
+const Section = dynamic(() => import('./Section'), { ssr: false });
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState(1);
@@ -34,35 +35,48 @@ export default function Portfolio() {
       {/* 背景層（固定） */}
       <div className="fixed inset-0 z-0">
         <div className="relative w-full h-full">
-          {isHovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0"
-            >
-              <CustomImage 
-                src={`/images/bg_section_${activeSection}.webp`} 
-                alt="Night View" 
-                fill 
-                className="object-cover" 
-                unoptimized
-              />
-            </motion.div>
-          )}
+          <AnimatePresence initial={false}>
+  {isHovered ? (
+    // 都市夜景（ホバー時）：セクションごとの夜景画像
+    <motion.div
+      key={`city-bg-${activeSection}`} // セクションごとにユニークなキーにする
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+      className="absolute inset-0 z-0"
+    >
+      <CustomImage 
+        src={`/images/bg_section_${activeSection}.webp`} // 以前の命名規則に合わせました
+        alt="City Night" 
+        fill 
+        style={{ objectFit: "cover" }} 
+      />
+    </motion.div>
+  ) : (
+    // 黒背景（通常時）
+    <motion.div
+      key="black-bg"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1.2, ease: "easeInOut" }}
+      className="absolute inset-0 z-0 bg-black"
+    />
+  )}
+</AnimatePresence>
         </div>
       </div>
 
       {/* コンテンツ層 */}
 <div className="relative z-20">
-        {[1, 2, 3, 4, 5].map((num) => (
-          <Section 
-            key={num} 
-            num={num} 
-            setActiveSection={setActiveSection} 
-          />
-        ))}
-      </div>
+  {[1, 2, 3, 4, 5].map((num) => (
+    <Section key={num} num={num} setActiveSection={setActiveSection}>
+      {/* ↓ ここが Section コンポーネント内の {children} になります */}
+      <h1 className="text-clr-white text-8xl font-bold">Section {num}</h1>
+    </Section>
+  ))}
+</div>
 
       {/* 実車レイヤー（右下固定） */}
       <div 
@@ -71,24 +85,47 @@ export default function Portfolio() {
         onMouseLeave={() => setIsHovered(false)}
       >
         <div className="relative w-[600px] h-[300px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`car-${activeSection}-${isHovered}`} // キーを変えることで再描画をトリガー
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0"
-            >
-              <CustomImage 
-                src={`/images/car_section_${activeSection}${isHovered ? "-seethrough" : ""}.png`} 
-                alt="Car" 
-                fill 
-                className="object-contain" 
-                unoptimized
-              />
-            </motion.div>
-          </AnimatePresence>
+
+<AnimatePresence>
+    {/* 通常の画像 */}
+    <motion.div
+      key={`normal-${activeSection}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.4 }}
+      className="absolute inset-0"
+    >
+      <CustomImage 
+        src={`/images/car_section_${activeSection}.png`} 
+        alt="Car" 
+        fill 
+        style={{ objectFit: "contain" }} 
+      />
+    </motion.div>
+
+    {/* ホバー時のシースルー画像 */}
+    {isHovered && (
+      <motion.div
+        key={`seethrough-${activeSection}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+transition={{ 
+          duration: 1.2,        
+          ease: "easeInOut",    
+          delay: 0.3,           
+        }}        className="absolute inset-0"
+      >
+        <CustomImage 
+          src={`/images/car_section_${activeSection}-seethrough.png`} 
+          alt="See-through Car" 
+          fill 
+          style={{ objectFit: "contain" }} 
+        />
+      </motion.div>
+    )}
+  </AnimatePresence>
         </div>
       </div>
     </div>

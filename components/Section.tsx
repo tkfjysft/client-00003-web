@@ -1,18 +1,24 @@
 "use client";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 
-export default function Section({ num, setActiveSection }: { num: number, setActiveSection: (n: number) => void }) {
+// ※このファイルは "use client" があるため、Next.js はSSRで中身を無理やり計算しようとしません
+export default function Section({ num, setActiveSection, children }: any) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.5 }); // 画面の50%に入ったら検知
+  const isInView = useInView(ref, { margin: "-20% 0px -80% 0px" });
 
   useEffect(() => {
-    if (isInView) setActiveSection(num);
+    if (isInView) {
+      setActiveSection(num);
+    }
   }, [isInView, num, setActiveSection]);
 
   return (
-    <section ref={ref} className="min-h-screen flex items-center p-20">
-      <h1 className="text-clr-white text-8xl font-bold">Section {num}</h1>
-    </section>
+    <motion.section 
+      ref={ref} 
+      className="min-h-screen flex items-center p-20"
+    >
+      {children}
+    </motion.section>
   );
 }
