@@ -8,8 +8,8 @@
   --color-clr-base-1: #0B0C0D;
   --color-clr-main-1: #1A1625; 
   --color-clr-primary-1: #416E98;
-  --color-clr-text-light-1: #C0C0C0;
-  --color-clr-clr-white: #ffffff;
+  --color-clr-light-1: #C0C0C0;
+  --color-clr-white: #ffffff;
 
 }
 
@@ -19,13 +19,13 @@
   --font-mono: var(--font-geist-mono); */
 
   --color-background: var(--color-clr-base-1);
-  --color-foreground: var(--color-clr-clr-white);
+  --color-foreground: var(--color-clr-white);
 
   --color-clr-base-1: var(--color-clr-base-1);
   --color-clr-main-1: var(--color-clr-main-1); 
   --color-clr-primary-1: var(--color-clr-primary-1);
-  --color-clr-text-light-1: var(--color-clr-text-light-1);
-  --color-clr-clr-white: var(--color-clr-clr-white);
+  --color-clr-light-1: var(--color-clr-light-1);
+  --color-clr-white: var(--color-clr-white);
 
 }
 
@@ -40,4 +40,42 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer base {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+p,
+span,
+div {
+	/* text-align: justify;
+	font-feature-settings: "palt"; */
+	/* // line-height: 1.8em; //これは@layer base {}の中では効かない
+		//jsx中では、leading-**は、「!」を使用して詳細度を強くしている
+		//そうでないと、globals.scssの方が詳細度が強くなる */
+}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+p,
+span,
+div {
+	/* line-height: 1.6em; */
+	/* // line-height: 1.8em; //これは@layer base {}の中では効かない
+	//jsx中では、leading-**は、「!」を使用して詳細度を強くしている
+	//そうでないと、globals.scssの方が詳細度が強くなる */
 }

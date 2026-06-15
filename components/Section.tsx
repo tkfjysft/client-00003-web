@@ -16,7 +16,7 @@ export default function Section({ num, setActiveSection, children }: any) {
   return (
     <motion.section 
       ref={ref} 
-      className="min-h-screen flex items-center p-20"
+      className="min-h-screen p-20"
     >
       {children}
     </motion.section>

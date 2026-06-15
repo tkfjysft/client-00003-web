@@ -4,6 +4,19 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import CustomImage from "@/components/CustomImage";
 import dynamic from 'next/dynamic';
+import HeroSection from "@/components/HeroSection";
+import MessageSection from "@/components//MessageSection";
+import CoatingSection from "@/components//CoatingSection";
+import MaintenanceSection from "@/components//MaintenanceSection";
+import AboutSection from "@/components//AboutSection";
+
+const SECTION_COMPONENTS = [
+  HeroSection,
+  MessageSection,
+  CoatingSection,
+  MaintenanceSection,
+  AboutSection,
+];
 
 const Section = dynamic(() => import('./Section'), { ssr: false });
 
@@ -69,14 +82,19 @@ export default function Portfolio() {
       </div>
 
       {/* コンテンツ層 */}
-<div className="relative z-20">
-  {[1, 2, 3, 4, 5].map((num) => (
-    <Section key={num} num={num} setActiveSection={setActiveSection}>
-      {/* ↓ ここが Section コンポーネント内の {children} になります */}
-      <h1 className="text-clr-white text-8xl font-bold">Section {num}</h1>
-    </Section>
-  ))}
-</div>
+		<div className="relative z-20">
+      {[1, 2, 3, 4, 5].map((num) => {
+        // 現在のnumに対応するコンポーネントを取り出す（配列は0から始まるので num-1）
+        const CurrentSectionComponent = SECTION_COMPONENTS[num - 1];
+
+        return (
+          <Section key={num} num={num} setActiveSection={setActiveSection}>
+            {/* 動的にコンポーネントを展開 */}
+            {CurrentSectionComponent && <CurrentSectionComponent />}
+          </Section>
+        );
+      })}
+    </div>
 
       {/* 実車レイヤー（右下固定） */}
       <div 
