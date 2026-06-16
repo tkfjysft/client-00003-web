@@ -1,6 +1,5 @@
 
 // import { siteConfig } from "@/config/site";
-import { useEffect, useRef } from "react";
 import Image from '@/components/CustomImage';
 
 

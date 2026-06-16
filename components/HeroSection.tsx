@@ -1,5 +1,4 @@
 import { siteConfig } from "@/config/site";
-import { useEffect, useRef } from "react";
 import Image from '@/components/CustomImage';
 
 
@@ -11,6 +10,7 @@ export default function HeroSection({ className }: HeroSectionProps) {
 
   return (
     <>
+	<div className="mt-[110vh]">
     <div className="mb-[110vh]">
     <p className="text-clr-white text-7xl">The best choice for the best one</p>
     <p className="text-clr-light-1 text-base">最高の１台のために最高の選択を</p>
@@ -31,6 +31,7 @@ export default function HeroSection({ className }: HeroSectionProps) {
     <p className="text-clr-white text-7xl">PLUS ULTRA</p>
     <p className="text-clr-light-1 text-base">もっと先へ</p>
     </div>
+	</div>
     </>
   );
 }

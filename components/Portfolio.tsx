@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useLayoutEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import CustomImage from "@/components/CustomImage";
 import dynamic from 'next/dynamic';
@@ -9,6 +9,7 @@ import MessageSection from "@/components//MessageSection";
 import CoatingSection from "@/components//CoatingSection";
 import MaintenanceSection from "@/components//MaintenanceSection";
 import AboutSection from "@/components//AboutSection";
+import { useMotionValueEvent } from "framer-motion";
 
 const SECTION_COMPONENTS = [
   HeroSection,
@@ -24,6 +25,19 @@ export default function Portfolio() {
   const [activeSection, setActiveSection] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [pageHeight, setPageHeight] = useState<number>(0);
+
+useLayoutEffect(() => {
+  const container = containerRef.current;
+  if (!container) return;
+
+  // 最初の一回だけ計算して固定する（何度も setPageHeight しない）
+  const height = container.scrollHeight;
+  setPageHeight(height);
+  
+  // ResizeObserver は今回の場合、逆にスクロール位置を狂わせる原因になるので
+  // 一度高さが決まったら更新しないようにするか、計算方法を検討してください。
+}, []);
 
   // スクロール量の取得
   const { scrollYProgress } = useScroll({
@@ -39,9 +53,12 @@ export default function Portfolio() {
       [1, 2, 3, 4, 5]);
 
   // 値の変更を検知して state を更新
-  section.on("change", (latest) => {
-    setActiveSection(Math.round(latest));
-  });
+useMotionValueEvent(section, "change", (latest) => {
+  const newSection = Math.round(latest);
+  if (activeSection !== newSection) {
+    setActiveSection(newSection);
+  }
+});
 
   return (
     <div ref={containerRef} className="relative w-full">
@@ -63,6 +80,8 @@ export default function Portfolio() {
         src={`/images/bg_section_${activeSection}.webp`} // 以前の命名規則に合わせました
         alt="City Night" 
         fill 
+		sizes="100vw"
+		priority
         style={{ objectFit: "cover" }} 
       />
     </motion.div>
@@ -82,7 +101,9 @@ export default function Portfolio() {
       </div>
 
       {/* コンテンツ層 */}
-		<div className="relative z-20">
+
+
+	  		<div className="relative z-20 h-[10000px]" style={{ minHeight: pageHeight > 0 ? `${pageHeight}px` : '100vh' }}>
       {[1, 2, 3, 4, 5].map((num) => {
         // 現在のnumに対応するコンポーネントを取り出す（配列は0から始まるので num-1）
         const CurrentSectionComponent = SECTION_COMPONENTS[num - 1];
@@ -95,6 +116,7 @@ export default function Portfolio() {
         );
       })}
     </div>
+
 
       {/* 実車レイヤー（右下固定） */}
       <div 
@@ -118,6 +140,8 @@ export default function Portfolio() {
         src={`/images/car_section_${activeSection}.png`} 
         alt="Car" 
         fill 
+		sizes="100vw"
+		priority
         style={{ objectFit: "contain" }} 
       />
     </motion.div>
@@ -139,6 +163,8 @@ transition={{
           src={`/images/car_section_${activeSection}-seethrough.png`} 
           alt="See-through Car" 
           fill 
+		  sizes="100vw"
+		  priority
           style={{ objectFit: "contain" }} 
         />
       </motion.div>
