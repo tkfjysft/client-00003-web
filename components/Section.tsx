@@ -1,24 +1,26 @@
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect } from "react";
 
-// ※このファイルは "use client" があるため、Next.js はSSRで中身を無理やり計算しようとしません
-export default function Section({ num, setActiveSection, children }: any) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-20% 0px -80% 0px" });
+// Section.tsx
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
+
+export default function Section({ num, setActiveSection, isScrolling, activeSection, children }: any) {
+  // 画面の真ん中あたりに来た時に判定する
+  const { ref, inView } = useInView({
+    threshold: 0.5, 
+    rootMargin: "20px 0p	x 0px 0px", 
+  });
 
   useEffect(() => {
-    if (isInView) {
+    // クリック移動中は無視、かつ自分自身がアクティブでない時だけ更新
+    if (!isScrolling && inView && activeSection !== num) {
       setActiveSection(num);
     }
-  }, [isInView, num, setActiveSection]);
+  }, [inView, num, setActiveSection, isScrolling, activeSection]);
 
   return (
-    <motion.section 
-      ref={ref} 
-      className="min-h-screen p-20"
-    >
+    <section ref={ref} id={`section-${num}`} className="min-h-[100vh] pt-[100vh]">
       {children}
-    </motion.section>
+    </section>
   );
 }
