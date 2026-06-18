@@ -1,35 +1,34 @@
-import { motion } from "framer-motion";
+import { SECTIONS } from "@/config/content";
 
-export default function HeroContent({ items, activeSection }: { items: any[], activeSection: number }) {
-  const currentItem = items[activeSection];
-  if (!currentItem) return null;
+export default function HeroSection() {
+  const heroSection = SECTIONS.find((section) => section.type === "hero");
+
+  if (!heroSection || !heroSection.items) return null;
 
   return (
-    // pointer-events-none はそのままに、fixed で位置を維持
-    <div className="fixed inset-0 flex flex-col justify-center px-[10vw] pointer-events-none z-30">
-      <motion.div
-        key={activeSection}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        
-        // 【追加】スクロールして画面半分以上過ぎたら透明にする
-        whileInView={{ opacity: 1 }} 
-        viewport={{ margin: "-50% 0px -50% 0px" }}
-      >
-        <span className="text-white/30 text-sm tracking-[0.3em] uppercase mb-4 block">
-          Collection {String(activeSection + 1).padStart(2, '0')}
-        </span>
+    <div className="pt-20">
+      {heroSection.items.map((item, index) => (
+        <div key={index} className="mb-[110vh] px-[8vw]">
+          {/* 左側の細いラインが「格式」を演出します */}
+          <div className="border-l border-white/20 pl-8 md:pl-16 py-2">
+            
+            {/* コレクション番号：小さく、かつ文字間隔を広く取ることで洗練を表現 */}
+            <span className="block text-white/40 text-[10px] tracking-[0.4em] uppercase mb-6 font-light">
+              Collection {String(index + 1).padStart(2, '0')}
+            </span>
 
-        <h1 className="text-[12vw] md:text-[8rem] font-medium text-white tracking-[-0.05em] leading-[0.9]">
-          {currentItem.en}
-        </h1>
+            {/* メインタイトル：あえてイタリック（斜体）を使用し、動的な気品を出す */}
+            <h1 className="text-[10vw] lg:text-[7rem] font-serif text-white tracking-[-0.03em] leading-[0.85] italic">
+              {item.en}
+            </h1>
 
-        <p className="text-gray-400 mt-8 max-w-md text-sm md:text-base font-light tracking-[0.1em] leading-relaxed border-l border-white/20 pl-6">
-          {currentItem.ja}
-        </p>
-      </motion.div>
+            {/* サブテキスト：読みやすく、かつ主張しすぎないグレーのトーン */}
+            <p className="mt-12 text-gray-400 text-sm md:text-base font-light tracking-[0.2em] leading-relaxed max-w-[450px]">
+              {item.ja}
+            </p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

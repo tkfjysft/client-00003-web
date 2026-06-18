@@ -9,6 +9,7 @@
   --color-clr-main-1: #1A1625; 
   --color-clr-primary-1: #416E98;
   --color-clr-light-1: #C0C0C0;
+  --color-clr-light-2: #d1d2dc;
   --color-clr-white: #ffffff;
 
 }
@@ -25,8 +26,44 @@
   --color-clr-main-1: var(--color-clr-main-1); 
   --color-clr-primary-1: var(--color-clr-primary-1);
   --color-clr-light-1: var(--color-clr-light-1);
+  --color-clr-light-2: var(--color-clr-light-2);
   --color-clr-white: var(--color-clr-white);
 
+    --background-image-bgclr-dark: 
+    radial-gradient(
+      circle 50vw at 100% 50%,
+      color-mix(in srgb, #ff0000 90%, transparent),
+      transparent 150%
+    ),
+      radial-gradient(
+        circle at 0% 0%,
+        color-mix(in srgb, #ff0000 90%, transparent),
+        transparent 50%
+      ),
+      linear-gradient(
+        to bottom right,
+        color-mix(in srgb, #ff0000 100%, transparent),
+        transparent 150%
+      );
+
+}
+
+.bg_dark_grad {
+    background-image:radial-gradient(
+      circle 30vw at 100% 20%,
+      color-mix(in srgb, var(--color-clr-primary-1) 10%, transparent),
+      transparent 150%
+    ),
+      radial-gradient(
+        circle 70vw at 0% 100%,
+        color-mix(in srgb, var(--color-clr-main-1) 50%, transparent),
+        transparent 50%
+      ),
+      linear-gradient(
+        to bottom right,
+        color-mix(in srgb, #000000 95%, transparent),
+        transparent 50%
+      );
 }
 
 @media (prefers-color-scheme: dark) {
