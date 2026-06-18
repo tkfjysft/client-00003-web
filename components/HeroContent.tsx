@@ -1,25 +1,22 @@
 import { motion } from "framer-motion";
 
 export default function HeroContent({ items, activeSection }: { items: any[], activeSection: number }) {
-
-  console.log("items:", items);
-  console.log("activeSection:", activeSection);
-
-  
-  // 安全装置：currentItem が存在するか確認し、なければ null を返す
   const currentItem = items[activeSection];
-
   if (!currentItem) return null;
 
   return (
-    <div className="h-screen flex flex-col justify-center px-[10vw] pointer-events-none">
-      {/* ... 以降は同じコード ... */}
+    // pointer-events-none はそのままに、fixed で位置を維持
+    <div className="fixed inset-0 flex flex-col justify-center px-[10vw] pointer-events-none z-30">
       <motion.div
         key={activeSection}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        
+        // 【追加】スクロールして画面半分以上過ぎたら透明にする
+        whileInView={{ opacity: 1 }} 
+        viewport={{ margin: "-50% 0px -50% 0px" }}
       >
         <span className="text-white/30 text-sm tracking-[0.3em] uppercase mb-4 block">
           Collection {String(activeSection + 1).padStart(2, '0')}

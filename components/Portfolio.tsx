@@ -166,6 +166,17 @@ const handleSectionChange = (id: number) => {
 
 
 
+
+
+  // SECTIONS 配列から items を持つものだけを抽出して一つにまとめる
+  const allCarItems = SECTIONS
+    .filter(section => section.items) // itemsがあるセクションだけ選ぶ
+    .flatMap(section => section.items); // それを平坦な一つの配列にする
+
+
+
+
+
   return (
 	<>
     <div ref={containerRef} className="relative w-full">
@@ -208,13 +219,17 @@ const handleSectionChange = (id: number) => {
       </div>
 
       {/* コンテンツ層 */}
+<div className="fixed inset-0 z-30 pointer-events-none">
+        <HeroContent 
+          items={allCarItems} 
+          activeSection={activeSection - 1} 
+        />
+      </div>
 
-
-	  		<div className="relative z-20 h-auto">
+	  		<div className="relative z-20 h-auto pt-[100vh]">
 				{SECTIONS.map((section) => (
 					<div id={`section-${section.id}`} key={section.id}>
-					<Section key={section.id} num={section.id} setActiveSection={setActiveSection} activeSection={activeSection} isScrolling={isScrolling}>
-						{section.type === "hero" && section.items && <HeroContent items={section.items} activeSection={activeSection} />}
+					<Section key={section.id} num={section.id} onInView={setActiveSection}>
 						{section.type === "message" && <MessageContent />}
 						{section.type === "coating" && section.title && section.links && (
 						<CoatingContent title={section.title} links={section.links} />
