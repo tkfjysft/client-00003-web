@@ -1,6 +1,23 @@
 import { siteConfig } from "@/config/site";
 
-export const SECTIONS = [
+export type SectionType = {
+  id: number;
+  type: "hero" | "message" | "coating" | "maintenance" | "about";
+  title?: string;
+  subtitle?: string; // 追加
+  photo?: string;    // 追加
+  intro?: string;    // 追加
+  description?: string; // 追加
+  body?: string;
+  items?: { en: string; ja: string }[];
+  links?: { label: string; href: string }[];
+  steps?: { id: string; title: string; label: string; text: string; link: string }[];
+  details?: { label: string; text: string }[]; // 追加
+  footer?: string;   // 追加
+  features?: { title: string; text: string }[]; // 追加
+};
+
+export const SECTIONS: SectionType[] = [
   {
     id: 1,
     type: "hero",
@@ -18,7 +35,7 @@ export const SECTIONS = [
   title: "Philosophy & Commitment",
   subtitle: "至高のカーライフをご提案するために",
   intro: "私たちは、単なる車両の販売を超えた価値を創造します。",
-  photo: "/images/coating.webp",
+  photo: "/images/carlineup.webp",
   details: [
     { label: "選定の美学", text: "厳しい基準をクリアした厳選車両のみをラインナップ。長年の知見で、あなたの理想を導き出します。" },
     { label: "洗練されたケア", text: "輝きを永続させる自社コーティングと、ディーラー水準のメンテナンス体制を完備。" }
@@ -47,13 +64,13 @@ export const SECTIONS = [
   type: "maintenance",
   title: "Maintenance & Flow",
   subtitle: "透明性の高い、安心のパートナーシップ",
-  photo: "/images/coating.webp",
+  photo: "/images/engine.webp",
   description: "車両探しから納車、そしてアフターケアまで。すべてはお客様との信頼関係から始まります。",
   steps: [
-    { id: "01", title: "Consultation", label: "お問合せ・ご相談", text: "お客様のご希望やご予算を丁寧にヒアリングいたします。" },
-    { id: "02", title: "Inspection", label: "現車確認・見積", text: "車両の状態を専門知識に基づいて細部までチェックします。" },
-    { id: "03", title: "Settlement", label: "ご契約・お支払い", text: "透明性の高い明細をご提示し、確実な手続きをサポートします。" },
-    { id: "04", title: "Delivery", label: "車両のお引き渡し", text: "隅々まで清掃し、最高のかたちで愛車をお届けします。" },
+    { id: "01", title: "Consultation", label: "お問合せ・ご相談", text: "お客様のご希望やご予算を丁寧にヒアリングいたします。" ,link: "/consultation" },
+    { id: "02", title: "Inspection", label: "現車確認・見積", text: "車両の状態を専門知識に基づいて細部までチェックします。" ,link: "/inspection"  },
+    { id: "03", title: "Settlement", label: "ご契約・お支払い", text: "透明性の高い明細をご提示し、確実な手続きをサポートします。" ,link: "/settlement"  },
+    { id: "04", title: "Delivery", label: "車両のお引き渡し", text: "隅々まで清掃し、最高のかたちで愛車をお届けします。" ,link: "/delivery"  },
   ]
 },
 {
@@ -61,7 +78,7 @@ export const SECTIONS = [
   type: "about",
   title: "Greeting",
   subtitle: "理想を現実に変える場所",
-  photo: "/images/coating.webp",
+  photo: "/images/business.webp",
   body: "国産車から欧州車まで、私たちは「愛車との対話」を大切にする場所でありたいと考えています。初めての方にも、深い拘りをお持ちの方にも、ここに来れば何かが変わる。そんな安心と情熱を備えた店舗を目指しています。",
   links: [
     { label: "アクセスマップ", href: "/access" },

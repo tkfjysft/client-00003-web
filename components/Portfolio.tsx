@@ -4,28 +4,45 @@ import { useLayoutEffect, useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import CustomImage from "@/components/CustomImage";
 import dynamic from 'next/dynamic';
-import { SECTIONS } from "@/config/content";
+import { SECTIONS, type SectionType } from '@/config/content';
 import HeroContent from "@/components//HeroContent";
 import MessageContent from "@/components//MessageContent";
 import CoatingContent from "@/components//CoatingContent";
 import MaintenanceContent from "@/components//MaintenanceContent";
 import AboutContent from "@/components//AboutContent";
 import Pagination from "@/components/Pagination";
-import Lenis from 'lenis';
+import GroundPlane from "@/components/GroundPlane";
 
+import Lenis from 'lenis';
 import { useMotionValueEvent } from "framer-motion";
+
+
+// const carConfig: Record<string, { matrix: string, offsetY: string }> = {
+//   "1": { 
+//     // matrix3d(a,b,c,d, e,f,g,h, i,j,k,l, m,n,o,p)
+//     // この数値をいじることで、四隅を個別に引っ張れます
+//     matrix: "matrix3d(1, 0.15, 0, 0,  -0.2, 0.7, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1)", 
+//     offsetY: "-50%"
+//   },
+// };
+
+type CarInfo = {
+  name: string;
+  trivia: string;
+};
+
+// 2. carData にその型を適用します
+const carData: Record<string, CarInfo> = {
+  "1": { name: "Ferrari 458 Italia", trivia: "Powered by a naturally aspirated 4.5L V8, the 458 Italia revs to 9,000 rpm, delivering a symphony of pure Italian performance.Designed by Pininfarina, the 458 Italia balances aerodynamic efficiency with a timeless, organic silhouette.A masterpiece of mid-engine engineering, designed to blur the line between road car and track weapon." },
+  "2": { name: "ランボルギーニ", trivia: "/images/car_section_2.png" },
+  "3": { name: "フェラーリ黄色", trivia: "/images/car_section_3.png" },
+  "4": { name: "マカン", trivia: "/images/car_section_4.png" },
+  "5": { name: "BMW", trivia: "/images/car_section_5.png" },
+};
 
 const MotionImage = motion(CustomImage);
 
-type SectionType = {
-  id: number;
-  type: string;
-  items?: any[];
-  title?: string;
-  body?: string;
-  links?: any[];
-  steps?: any[];
-};
+
 
 const Section = dynamic(() => import('./Section'), { ssr: false });
 
@@ -163,11 +180,23 @@ const handleSectionChange = (id: number) => {
   }, 1000);
 };
 
+const currentCar = carData[String(activeSection)] || carData["1"];
+
+
+
+
+  // 2. スクロールの後半（例：80%〜100%の間）でopacityを1から0に変える
+  const opacity = useTransform(scrollYProgress, [0.99, 1], [1, 0]);
 
 
 
   return (
 	<>
+		  <motion.div
+	  		style={{
+        opacity,
+      	}}
+		>
     <div ref={containerRef} className="relative w-full">
       {/* 背景層（固定） */}
       <div className="fixed inset-0 z-0">
@@ -189,8 +218,14 @@ const handleSectionChange = (id: number) => {
         fill 
 		sizes="100vw"
 		priority
-        style={{ objectFit: "cover" }} 
-      />
+		style={{ 
+			objectFit: "cover",
+			filter: "brightness(1.5)" // 明度を50%にし、コントラストを上げる
+		}}
+        />
+{/* <div 
+    className="absolute inset-0 bg-[#001a4d] mix-blend-multiply opacity-60" 
+  /> */}
     </motion.div>
   ) : (
     // 黒背景（通常時）
@@ -208,23 +243,22 @@ const handleSectionChange = (id: number) => {
         </div>
       </div>
 
+
       {/* コンテンツ層 */}
-
-
 	  		<div className="relative z-20 h-auto">
-				{SECTIONS.map((section) => (
+				{SECTIONS.map((section: SectionType) => (
 					<div id={`section-${section.id}`} key={section.id}>
 					<Section key={section.id} num={section.id} onInView={setActiveSection}>
-						{section.type === "hero" && section.items && <HeroContent items={section.items} activeSection={activeSection-1} />}
+						{section.type === "hero" && section.items && <HeroContent />}
 						{section.type === "message" && <MessageContent />}
 						{section.type === "coating" && section.title && section.links && (
-						<CoatingContent title={section.title} links={section.links} />
+						<CoatingContent />
 						)}
 						{section.type === "maintenance" && section.title && section.steps && (
-						<MaintenanceContent title={section.title} steps={section.steps} />
+						<MaintenanceContent />
 						)}
 						{section.type === "about" && section.title && section.body && section.links && (
-						<AboutContent title={section.title} body={section.body} links={section.links} />
+						<AboutContent />
 						)}
 					</Section>
 					</div>
@@ -234,17 +268,40 @@ const handleSectionChange = (id: number) => {
 
       {/* 実車レイヤー（右下固定） */}
       <div 
-        className="fixed bottom-10 right-10 z-30 cursor-pointer"
+        className="fixed -bottom-30 right-[6vw] z-30 cursor-pointer w-[30vw] h-[30vw]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="relative w-[600px] h-[300px] overflow-visible">
+
+{/* <div className="w-[20vw] fixed top-[10%] p-8">
+				<p className="text-center">
+      		{currentCar.name}
+    	</p>
+		<p className="text-xs">
+      		{currentCar.trivia}
+    	</p>
+		</div> */}
+
+
+
+        <div className="relative w-full h-full overflow-visible">
+
+
+<GroundPlane activeSection={activeSection} isHovered={isHovered} />
+
+
+
+
+
+
+<div className="relative w-full h-full z-10">
+
 
 {/* ★修正：地面レイヤー（独立させる） */}
-<motion.div
+{/* <motion.div
   key="ground-plane"
   initial={false}
-  className="absolute bottom-[-10px] left-[10%] w-[80%] h-[30px] bg-white/40 blur-2xl rounded-full z-[5]"
+  className="relative top-[72%] left-[-1%] w-[90%] h-[2vw] bg-white/40 blur-2xl rounded-full z-[0]"
   animate={{ 
     opacity: isHovered ? 0.8 : 0.7,
     scale: isHovered ? 1.15 : 1, // 少しだけ強めに広げる
@@ -255,14 +312,22 @@ const handleSectionChange = (id: number) => {
     duration: 0.6, 
     ease: [0.22, 1, 0.36, 1] // Appleなどが使う非常に滑らかなイージング
   }}
-/>
+/> */}
 
 
-<div className="relative w-full h-full z-10">
+
+
+
+
+
+
   <AnimatePresence mode="wait">
 {/* <div className="fixed inset-0 w-full h-full flex items-center justify-center p-20 z-0"> */}
 
 {/* </div> */}
+
+
+
     {isHovered ? (
       // ホバー時は常にシースルーを表示（スクロールしても即座に次のシースルーへ）
       <motion.div
@@ -273,6 +338,10 @@ const handleSectionChange = (id: number) => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="absolute inset-0"
       >
+
+
+
+
 		<MotionImage
 			src={`/images/car_section_${activeSection}-seethrough.png`}
 			alt={`Car section ${activeSection}`}
@@ -297,6 +366,9 @@ const handleSectionChange = (id: number) => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className="absolute inset-0"
       >
+
+
+
 		<MotionImage
 			src={`/images/car_section_${activeSection}.png`}
 			alt={`Car section ${activeSection}`}
@@ -305,19 +377,21 @@ const handleSectionChange = (id: number) => {
 			priority
 			// ズーム演出はここに記述
 			initial={{ opacity: 0, scale: 0.95 }}
-  animate={{ opacity: 1, scale: 1 }}
-  exit={{ opacity: 0, scale: 1.05 }}
-  // ここを調整！
-  transition={{
-    duration: 0.8, // 出現時の時間はそのまま
-    ease: [0.22, 1, 0.36, 1],
-    exit: {
-      duration: 0.3, // 消える時は0.3秒でサッと消す
-      ease: "easeIn" // 消える時は直線的に消すとキレが出る
-    }
-  }}
+			animate={{ opacity: 1, scale: 1 }}
+			exit={{ opacity: 0, scale: 1.05 }}
+			// ここを調整！
+			transition={{
+				duration: 0.8, // 出現時の時間はそのまま
+				ease: [0.22, 1, 0.36, 1],
+				exit: {	
+				duration: 0.3, // 消える時は0.3秒でサッと消す
+				ease: "easeIn" // 消える時は直線的に消すとキレが出る
+				}
+  			}}
 			style={{ objectFit: "contain" }}
-			/>
+		/>
+
+
       </motion.div>
     )}
   </AnimatePresence>
@@ -329,7 +403,9 @@ const handleSectionChange = (id: number) => {
       </div>
 
 
+
     </div>
+	</motion.div>
 
 	<Pagination
 	 activeSection={activeSection}
@@ -338,3 +414,47 @@ const handleSectionChange = (id: number) => {
 	</>
   );
 }
+
+
+
+
+
+
+// 		<div className="absolute top-0 w-full h-1/2">
+// 		<MotionImage
+// 			src={`/images/car_section_${activeSection}.png`}
+// 			alt={`Car section ${activeSection}`}
+// 			fill
+// 			sizes="100vw"
+// 			priority
+// 			// ズーム演出はここに記述
+// 			initial={{ opacity: 0, scale: 0.95 }}
+// 			animate={{ opacity: 1, scale: 1 }}
+// 			exit={{ opacity: 0, scale: 1.05 }}
+// 			// ここを調整！
+// 			transition={{
+// 				duration: 0.8, // 出現時の時間はそのまま
+// 				ease: [0.22, 1, 0.36, 1],
+// 				exit: {
+// 				duration: 0.3, // 消える時は0.3秒でサッと消す
+// 				ease: "easeIn" // 消える時は直線的に消すとキレが出る
+// 				}
+//   			}}
+// 			style={{ objectFit: "contain" }}
+// 		/>
+// 		</div>
+// <div 
+//   className="absolute top-1/2 w-full h-1/2"
+// >
+// <motion.img
+//   src={`/c/images/car_section_${activeSection}.png`}
+//   alt="Reflection"
+//   className="w-full h-full object-contain object-top opacity-30"
+// style={{
+//   transform: `scaleY(-1) ${carConfig[String(activeSection)]?.matrix} translateY(${carConfig[String(activeSection)]?.offsetY})`,
+//   transformOrigin: 'top center',
+// }}
+
+
+// />
+// </div>

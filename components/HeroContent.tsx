@@ -1,14 +1,15 @@
 import { SECTIONS } from "@/config/content";
 
+
 export default function HeroSection() {
   const heroSection = SECTIONS.find((section) => section.type === "hero");
 
   if (!heroSection || !heroSection.items) return null;
 
   return (
-    <div className="pt-20">
+    <div className="pt-[100vh]">
       {heroSection.items.map((item, index) => (
-        <div key={index} className="mb-[110vh] px-[8vw]">
+        <div key={index} className="mb-[110vh] px-[8vw] contents-area">
           {/* 左側の細いラインが「格式」を演出します */}
           <div className="border-l border-white/20 pl-8 md:pl-16 py-2">
             
@@ -18,7 +19,7 @@ export default function HeroSection() {
             </span>
 
             {/* メインタイトル：あえてイタリック（斜体）を使用し、動的な気品を出す */}
-            <h1 className="text-[10vw] lg:text-[7rem] font-serif text-white tracking-[-0.03em] leading-[0.85] italic">
+            <h1 className="text-[10vw] lg:text-8xl text-white tracking-[-0.03em] leading-[1.5] text-gradient">
               {item.en}
             </h1>
 

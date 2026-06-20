@@ -23,7 +23,7 @@ export default function Section({ num, children, onInView }: any) {
 
 
   return (
-    <section ref={ref} id={`section-${num}`} className="min-h-[100vh] pt-[100vh]">
+    <section ref={ref} id={`section-${num}`} className="min-h-[100vh] pt-[20vh] py-200">
       {children}
     </section>
   );

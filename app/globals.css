@@ -7,7 +7,7 @@
   /* ここに共通変数を置く */
   --color-clr-base-1: #0B0C0D;
   --color-clr-main-1: #1A1625; 
-  --color-clr-primary-1: #416E98;
+  --color-clr-primary-1: #7398bb;
   --color-clr-light-1: #C0C0C0;
   --color-clr-light-2: #d1d2dc;
   --color-clr-white: #ffffff;
@@ -73,6 +73,11 @@
   }
 }
 
+html {
+  overflow-y: scroll;
+}
+
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -115,4 +120,19 @@ div {
 	/* // line-height: 1.8em; //これは@layer base {}の中では効かない
 	//jsx中では、leading-**は、「!」を使用して詳細度を強くしている
 	//そうでないと、globals.scssの方が詳細度が強くなる */
+}
+
+
+
+
+
+
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(to right, var(--color-clr-white), var(--color-clr-light-2), var(--color-clr-light-1));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
