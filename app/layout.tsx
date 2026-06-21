@@ -1,19 +1,17 @@
-import Link from 'next/link';
+import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Zen_Kaku_Gothic_New } from 'next/font/google';
-import { Playfair_Display, Noto_Serif_JP, Archivo } from 'next/font/google';
-import { Arsenal } from 'next/font/google';
+import { Zen_Kaku_Gothic_New } from "next/font/google";
+import { Playfair_Display, Noto_Serif_JP, Archivo } from "next/font/google";
+import { Arsenal } from "next/font/google";
 import SnsLinks from "@/components/SnsLinks";
-import RootLayoutWrapper from '@/components/RootLayoutWrapper';
-
+import RootLayoutWrapper from "@/components/RootLayoutWrapper";
 
 import Header from "@/components/Header";
 
-
 import "./globals.css";
-import React from 'react';
+import React from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,29 +23,28 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const archivo = Archivo({ 
-	subsets: ['latin'] 
+const archivo = Archivo({
+  subsets: ["latin"],
 });
 
 const zenKaku = Zen_Kaku_Gothic_New({
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'], 
-  display: 'swap',
-  variable: '--font-zen-kaku', 
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  display: "swap",
+  variable: "--font-zen-kaku",
 });
 
 const notoSerif = Noto_Serif_JP({
-  subsets: ['latin'],
-  variable: '--font-noto-serif',
-  weight: ['200', '300', '400', '500', '700'],
+  subsets: ["latin"],
+  variable: "--font-noto-serif",
+  weight: ["200", "300", "400", "500", "700"],
 });
 
-const bebas = Arsenal({ 
-  weight: ['400','700'],
-  subsets: ['latin'],
-  variable: '--font-bebas', 
+const bebas = Arsenal({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-bebas",
 });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -59,75 +56,83 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-
     >
-      <body className="min-h-full flex flex-col"
-	  	  style={{
-			fontFamily: `${bebas.style.fontFamily}, ${zenKaku.style.fontFamily}, sans-serif`,
-			}}
-			>
-
-<RootLayoutWrapper>
-		<Header />
+      <body
+        className="min-h-full flex flex-col"
+        style={{
+          fontFamily: `${bebas.style.fontFamily}, ${zenKaku.style.fontFamily}, sans-serif`,
+        }}
+      >
+        <RootLayoutWrapper>
+          <Header />
           {children}
-		  <footer className="text-clr-white h-[800px] pt-80 px-[8vw] mt-[100vh] contents-area"
-		style={{
-		backgroundImage: 'url(/c/images/bg_footer.webp)',
-		backgroundSize: 'cover',
-			backgroundPosition: 'center',
-			width: '100vw',
-			maskImage: 'linear-gradient(to bottom, transparent 0%, black 80%)',
-    WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 80%)',
-				}}
-		>
+          <footer
+            className="text-clr-white h-[800px] w-full pt-80 px-[8vw] mt-[100vh] contents-area"
+            style={{
+              backgroundImage: "url(/c/images/bg_footer.webp)",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              maskImage:
+                "linear-gradient(to bottom, transparent 0%, black 80%)",
+              WebkitMaskImage:
+                "linear-gradient(to bottom, transparent 0%, black 80%)",
+            }}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 p-12 bg-clr-base-1/90">
+              {/* 左: ブランド */}
+              <div className="space-y-3 border-r border-clr-white/30">
+                <h3 className="text-xl font-bold tracking-widest">
+                  {siteConfig.companyName1} {siteConfig.companyName2}
+                </h3>
+                <p>〒{siteConfig.contact.postcode}</p>
+                <p>{siteConfig.contact.address1}</p>
+                <p>{siteConfig.contact.address2}</p>
+                <p>TEL : {siteConfig.contact.tel}</p>
+                <p>FAX : {siteConfig.contact.fax}</p>
+                <p>営業時間: 10:00 - 19:00 (定休日: 火曜)</p>
+              </div>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-12 p-12 bg-clr-base-1/90">
-    
-    {/* 左: ブランド */}
-    <div className="space-y-3 border-r border-clr-white/30">
-      <h3 className="text-xl font-bold tracking-widest">{siteConfig.companyName1} {siteConfig.companyName2}</h3>
-      <p>〒{siteConfig.contact.postcode}</p>
-      <p>{siteConfig.contact.address1}</p>
-      <p>{siteConfig.contact.address2}</p>
-      <p>TEL : {siteConfig.contact.tel}</p>
-      <p>FAX : {siteConfig.contact.fax}</p>
-      <p>営業時間: 10:00 - 19:00 (定休日: 火曜)</p>
-    </div>
+              {/* 中央: サイトマップ */}
+              <div className="flex flex-col space-y-4 text-base border-r uppercase tracking-[0.2em] border-clr-white/30">
+                <Link href="/coating" className="hover:text-clr-primary-1">
+                  Coating
+                </Link>
+                <Link href="/maintenance" className="hover:text-clr-primary-1">
+                  Maintenance
+                </Link>
+                <Link href="/about" className="hover:text-clr-primary-1">
+                  About
+                </Link>
+                <Link href="/contact" className="hover:text-clr-primary-1">
+                  Contact
+                </Link>
+                <Link href="/privacy" className="hover:text-clr-primary-1">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="hover:text-clr-primary-1">
+                  Terms of Service
+                </Link>
+              </div>
 
-    {/* 中央: サイトマップ */}
-    <div className="flex flex-col space-y-4 text-base border-r uppercase tracking-[0.2em] border-clr-white/30">
-      <Link href="/coating" className="hover:text-clr-primary-1">Coating</Link>
-      <Link href="/maintenance" className="hover:text-clr-primary-1">Maintenance</Link>
-      <Link href="/about" className="hover:text-clr-primary-1">About</Link>
-      <Link href="/contact" className="hover:text-clr-primary-1">Contact</Link>
-      <Link href="/privacy" className="hover:text-clr-primary-1">Privacy Policy</Link>
-      <Link href="/terms" className="hover:text-clr-primary-1">Terms of Service</Link>
-    </div>
+              {/* 右: コンタクト */}
+              <div>
+                <div className="w-full">
+                  <SnsLinks />
+                </div>
 
-    {/* 右: コンタクト */}
-	<div>
-	          <div className="w-full">
-            <SnsLinks />
-          </div>
-
-		    <div className="mt-8 text-xs">
-    &copy; 2026 {siteConfig.enCompamyName1} {siteConfig.enCompamyName2} Inc. All Rights Reserved.
-  </div>
-	</div>
-  </div>
-
-</footer>
-</RootLayoutWrapper>
-
-				
-				
-		</body>
+                <div className="mt-8 text-xs">
+                  &copy; 2026 {siteConfig.enCompamyName1}{" "}
+                  {siteConfig.enCompamyName2} Inc. All Rights Reserved.
+                </div>
+              </div>
+            </div>
+          </footer>
+        </RootLayoutWrapper>
+      </body>
     </html>
   );
 }

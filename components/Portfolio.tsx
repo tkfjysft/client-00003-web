@@ -378,15 +378,11 @@ const currentCar = carData[String(activeSection)] || carData["1"];
 			// ズーム演出はここに記述
 			initial={{ opacity: 0, scale: 0.95 }}
 			animate={{ opacity: 1, scale: 1 }}
-			exit={{ opacity: 0, scale: 1.05 }}
+			exit={{ opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
 			// ここを調整！
 			transition={{
 				duration: 0.8, // 出現時の時間はそのまま
 				ease: [0.22, 1, 0.36, 1],
-				exit: {	
-				duration: 0.3, // 消える時は0.3秒でサッと消す
-				ease: "easeIn" // 消える時は直線的に消すとキレが出る
-				}
   			}}
 			style={{ objectFit: "contain" }}
 		/>

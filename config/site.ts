@@ -21,7 +21,7 @@ export type SubNavItem = {
 
 export const siteConfig = {
   companyName1: "カーサービス",
-  companyName2: "ラック",
+  companyName2: "LAC",
   enCompamyName1: "CAR SERVICE",
   enCompamyName2: "LAC",
   ownerName: "山田 太郎", 
