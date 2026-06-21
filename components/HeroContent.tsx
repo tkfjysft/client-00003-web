@@ -7,9 +7,9 @@ export default function HeroSection() {
   if (!heroSection || !heroSection.items) return null;
 
   return (
-    <div className="pt-[100vh]">
+    <div className="pt-[100vh] contents-area">
       {heroSection.items.map((item, index) => (
-        <div key={index} className="mb-[110vh] px-[8vw] contents-area">
+        <div key={index} className="mb-[110vh] px-[8vw]">
           {/* 左側の細いラインが「格式」を演出します */}
           <div className="border-l border-white/20 pl-8 md:pl-16 py-2">
             
