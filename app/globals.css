@@ -136,3 +136,17 @@ div {
     color: transparent;
   }
 }
+
+
+
+
+.ground-plane-transition {
+transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+  /* 描画の崩れを防ぐための魔法のプロパティ */
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+
+

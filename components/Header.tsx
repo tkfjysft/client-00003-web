@@ -1,40 +1,69 @@
+"use client";
+import { useState } from 'react';
 import Link from 'next/link';
 import FloatingLogo from "@/components/FloatingLogo";
 
-
 export default function Header() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
+
+  
   return (
     <>
-<header className="fixed top-0 w-full z-50 px-[8vw] py-12 flex justify-start items-center bg-clr-base-1/50">
-  {/* 右上のナビゲーション */}
-<nav className="flex gap-8 text-clr-light-1 text-base uppercase tracking-[0.2em]">
-  <Link href="/" className="hover:text-clr-white transition">
-    Home
-  </Link>
+      <header className={`fixed top-0 w-full z-50 px-[8vw] py-12 flex justify-between items-center
+			${
+				isHeaderHovered ? 'bg-transparent' : 'bg-clr-base-1/50'
+			}`}
+			onMouseEnter={() => {
+    console.log("hovered");
+    setIsHeaderHovered(true);
+  }}
+  onMouseLeave={() => {
+    console.log("left");
+    setIsHeaderHovered(false);
+  }}
 
-  <Link href="/coating" className="hover:text-clr-white transition">
-    Coating
-  </Link>
+	  >
+        
+        {/* PC用ナビゲーション（md未満ではhidden） */}
+        <nav className="hidden md:flex gap-8 text-clr-light-1 text-base uppercase tracking-[0.2em]">
+          <Link href="/" className="hover:text-clr-white transition">Home</Link>
+          <Link href="/coating" className="hover:text-clr-white transition">Coating</Link>
+          <Link href="/maintenance" className="hover:text-clr-white transition">Maintenance</Link>
+          <Link href="/about" className="hover:text-clr-white transition">About</Link>
+          <Link href="/contact" className="hover:text-clr-white transition">Contact</Link>
+        </nav>
 
-  <Link href="/maintenance" className="hover:text-clr-white transition">
-    Maintenance
-  </Link>
+        {/* スマホ用ハンバーガーボタン（md以上ではhidden） */}
+        <button 
+          className="md:hidden text-clr-white z-50 p-2"
+          onClick={() => setIsDrawerOpen(true)}
+        >
+          MENU
+        </button>
 
-  <Link href="/about" className="hover:text-clr-white transition">
-    About
-  </Link>
+        <FloatingLogo />
+      </header>
 
-  <Link href="/contact" className="hover:text-clr-white transition">
-    Contact
-  </Link>
-</nav>
+      {/* スマホ用ドロワーメニュー（右側から半分） */}
+      <div className={`md:hidden fixed top-0 right-0 h-full w-1/2 bg-clr-base-1 z-50 transform transition-transform duration-300 ease-in-out ${isDrawerOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col p-12 gap-8 text-clr-light-1 mt-20 uppercase">
+          <button onClick={() => setIsDrawerOpen(false)} className="self-end mb-8">CLOSE</button>
+          <Link href="/" onClick={() => setIsDrawerOpen(false)}>Home</Link>
+          <Link href="/coating" onClick={() => setIsDrawerOpen(false)}>Coating</Link>
+          <Link href="/maintenance" onClick={() => setIsDrawerOpen(false)}>Maintenance</Link>
+          <Link href="/about" onClick={() => setIsDrawerOpen(false)}>About</Link>
+          <Link href="/contact" onClick={() => setIsDrawerOpen(false)}>Contact</Link>
+        </div>
+      </div>
 
-{/* ロゴの配置（ヘッダー下、車画像の上付近） */}
-<FloatingLogo />
-
-</header>
-
-
-</>
+      {/* ドロワーを開いている時の背景オーバーレイ（任意） */}
+      {isDrawerOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden" 
+          onClick={() => setIsDrawerOpen(false)} 
+        />
+      )}
+    </>
   );
 }

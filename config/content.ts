@@ -2,7 +2,7 @@ import { siteConfig } from "@/config/site";
 
 export type SectionType = {
   id: number;
-  type: "hero" | "message" | "coating" | "maintenance" | "about";
+  type: "ci" |"hero" | "message" | "coating" | "maintenance" | "about";
   title?: string;
   subtitle?: string; // 追加
   photo?: string;    // 追加
@@ -18,6 +18,10 @@ export type SectionType = {
 };
 
 export const SECTIONS: SectionType[] = [
+  {
+    id: 6,
+    type: "ci",
+  },
   {
     id: 1,
     type: "hero",

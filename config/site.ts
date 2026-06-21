@@ -26,7 +26,7 @@ export const siteConfig = {
   enCompamyName2: "LAC",
   ownerName: "山田 太郎", 
   metaTitle: "",
-  metaDescription: "CAR SERVICE LAC カーサービス ラックは東京都中央区の中古車販売(欧州車/国産車)です。モデル/年式/カラー/予算等から探します。洗車/コーティングも実施",
+  metaDescription: "CAR SERVICE LAC カーサービス LACは東京都中央区の中古車販売(欧州車/国産車)です。モデル/年式/カラー/予算等から探します。洗車/コーティングも実施",
   heroTagline: "真昼の白に、夜のきらめきを。",
   description1: "多様な技術を駆使し、ビジネスの課題をシンプルな解決策へと導くデジタルパートナー。確かな技術力と柔軟な思考で、次世代のスタンダードを共創します。",
   description2: "",
