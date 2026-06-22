@@ -21,6 +21,7 @@ import CarImage from "../components/CarImage";
 
 
 
+
 import Lenis from "lenis";
 import { useMotionValueEvent } from "framer-motion";
 
