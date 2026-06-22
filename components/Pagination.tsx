@@ -4,10 +4,9 @@ interface PaginationProps {
   activeSection: number;
   onNavigate: (id: number) => void; // 関数型であることを明示
   setActiveSection: (id: number) => void;
-  isSixActiveSection: boolean;
 }
 
-export default function Pagination({ activeSection, onNavigate, setActiveSection, isSixActiveSection }: PaginationProps) {
+export default function Pagination({ activeSection, onNavigate, setActiveSection,  }: PaginationProps) {
   const scrollToSection = (id: number) => {
     // 現在のセクションIDに基づいて、対応する要素をDOMから探すか、
     // あるいは単純に id で指定してスクロールさせます

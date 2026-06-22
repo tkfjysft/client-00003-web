@@ -21,17 +21,17 @@ type CarType =
 type GroundConfig = {
   scaleY: number;
   skewX: number;
-  bottom: string;
+  bottom: number;
   bgColor: string;
   showGradient?: boolean;
 };
 
 const carGroundConfigs: Record<CarType, GroundConfig> = {
-  car_section_1: { scaleY: 2.2, skewX: -84, bottom: "0", bgColor: '#000000', showGradient: false },
-  car_section_2: { scaleY: 2.2, skewX: -84, bottom: "0", bgColor: '#000000', showGradient: false },
-  car_section_3: { scaleY: 2.2, skewX: -84, bottom: "0", bgColor: '#000000', showGradient: false },
-  car_section_4: { scaleY: 1, skewX: -83,   bottom: "30%", bgColor: '#000000', showGradient: false },
-  car_section_5: { scaleY: 1, skewX: -83, bottom: "30%", bgColor: 'none', showGradient: false },
+  car_section_1: { scaleY: 2.2, skewX: -84, bottom: -20, bgColor: '#000000', showGradient: false },
+  car_section_2: { scaleY: 2.2, skewX: -84, bottom: -8, bgColor: '#000000', showGradient: false },
+  car_section_3: { scaleY: 2.2, skewX: -83, bottom: -4, bgColor: '#000000', showGradient: false },
+  car_section_4: { scaleY: 1, skewX: -83,   bottom: -35, bgColor: '#000000', showGradient: false },
+  car_section_5: { scaleY: 1, skewX: -83,   bottom: -35, bgColor: 'none', showGradient: false },
 };
 
 export default function GroundPlane({
@@ -44,12 +44,12 @@ export default function GroundPlane({
 
   return (
 <div 
-  className={`absolute -bottom-[${config.bottom}] left-[80%] w-[400%] h-full transition-all duration-600 ease-in-out
+  className={`absolute left-[80%] w-full h-full transition-all duration-600 ease-in-out
 	ground-plane-transition
   `}
   style={{
-
-    transform: `scaleY(${config.scaleY}) skewX(${config.skewX}deg) translateY(${isHovered ? "-10px" : "0px"})`,
+	bottom: `${config.bottom}%`,
+    transform: `scaleY(${config.scaleY}) skewX(${config.skewX}deg) translateY(${isHovered ? "-30px" : "-30px"})`,
     transformOrigin: "top center",
         backgroundImage: isHovered 
     ? 'linear-gradient(to right, #00000030 50%, #000000 100%), linear-gradient(to top, #00000030 90%, #000000 100%)' 

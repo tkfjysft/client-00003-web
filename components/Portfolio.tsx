@@ -57,7 +57,6 @@ const Section = dynamic(() => import("./Section"), { ssr: false });
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState(1);
-  const [isSixActiveSection, setIsSixActiveSection] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -155,23 +154,21 @@ export default function Portfolio() {
     setIsImageLoaded(false);
   }, [activeSection]);
 
+
+
+
   const displayId = activeSection === 6 ? 1 : activeSection;
 
 
-const sixSectionChange = (id: number) => {
-    if (id === 6) {
-    setActiveSection(1);
-	
-  } else {
-    setActiveSection(id);
-  }
-}
+
+
+
+
 
   const handleSectionChange = (id: number) => {
     setIsScrolling(true);
     if (id === 6) {
     setActiveSection(1);
-	setIsSixActiveSection(true);
   } else {
     setActiveSection(id);
   }
@@ -208,7 +205,7 @@ const sixSectionChange = (id: number) => {
                 {isHovered ? (
                   // 都市夜景（ホバー時）：セクションごとの夜景画像
                   <motion.div
-                    key={`city-bg-${activeSection}`} // セクションごとにユニークなキーにする
+                    key={`city-bg-${displayId}`} // セクションごとにユニークなキーにする
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -216,7 +213,7 @@ const sixSectionChange = (id: number) => {
                     className="absolute inset-0 z-0"
                   >
                     <CustomImage
-                      src={`/images/bg_section_${activeSection}.webp`} // 以前の命名規則に合わせました
+                      src={`/images/bg_section_${displayId}.webp`} // 以前の命名規則に合わせました
                       alt="City Night"
                       fill
                       sizes="100vw"
@@ -288,7 +285,6 @@ const sixSectionChange = (id: number) => {
         activeSection={activeSection}
         onNavigate={handleSectionChange}
         setActiveSection={setActiveSection}
-		isSixActiveSection={isSixActiveSection}
       />
     </>
   );

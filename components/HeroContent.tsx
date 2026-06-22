@@ -1,4 +1,5 @@
 import { SECTIONS } from "@/config/content";
+import CustomImage from "@/components/CustomImage";
 
 
 export default function HeroSection() {
@@ -9,7 +10,7 @@ export default function HeroSection() {
   return (
     <div className="pt-[10vh] contents-area">
       {heroSection.items.map((item, index) => (
-        <div key={index} className="mb-[100vh] px-[8vw]">
+        <div key={index} className="mb-[70vh] px-[8vw]">
           {/* 左側の細いラインが「格式」を演出します */}
           <div className="border-l border-white/20 pl-8 md:pl-16 py-2">
             
@@ -27,7 +28,29 @@ export default function HeroSection() {
             <p className="mt-12 text-gray-400 text-sm md:text-base font-light tracking-[0.2em] leading-relaxed max-w-[450px]">
               {item.ja}
             </p>
+			
+
+
+
           </div>
+
+		  			<div className="relative mt-40 w-[50vw] h-[50vw] md:w-[30vw] md:h-[30vw] aspect-video overflow-hidden"
+							style={{
+							// borderRadius: '50%',
+							WebkitMaskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)',
+							maskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)'
+				}}
+			>
+			<CustomImage
+				src={item.photo}
+				alt="Greeting"
+				fill
+				className="object-cover" 
+				sizes="(max-width: 768px) 100vw, 40vw" 
+				priority
+
+			/>
+			</div>
         </div>
       ))}
     </div>

@@ -27,8 +27,8 @@ export default function EdgeLine({ isHovered }: EdgeLineProps) {
     
     // 【重要】奥（上方向）に行くほど透明にするマスク
     // bottom が 0% (線が濃い)、top が 100% (透明)
-    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
-    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
+    maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 94%, rgba(0,0,0,0) 100%)',
+    WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 60%, rgba(0,0,0,0.4) 94%, rgba(0,0,0,0) 100%)',
     
     // ぼかしを追加したい場合はここ
     filter: 'blur(20px)', 

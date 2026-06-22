@@ -9,7 +9,7 @@ export type SectionType = {
   intro?: string;    // 追加
   description?: string; // 追加
   body?: string;
-  items?: { en: string; ja: string }[];
+  items?: { en: string; ja: string; photo: string }[];
   links?: { label: string; href: string }[];
   steps?: { id: string; title: string; label: string; text: string; link: string }[];
   details?: { label: string; text: string }[]; // 追加
@@ -26,11 +26,11 @@ export const SECTIONS: SectionType[] = [
     id: 1,
     type: "hero",
     items: [
-      { en: "The best choice for the best one", ja: "最高の１台のために最高の選択を" },
-      { en: "Cars all over the world are waiting for you", ja: "世界中の車があなたを待っている" },
-      { en: "Come on, let's run", ja: "さあ、走りだそう" },
-      { en: "Everywhere you want to be", ja: "あなたの目指す所へ" },
-      { en: "PLUS ULTRA", ja: "もっと先へ" },
+      { en: "The best choice for the best one", ja: "最高の１台のために最高の選択を", photo: "/images/pht_hero_1.webp" },
+      { en: "Cars all over the world are waiting for you", ja: "世界中の車があなたを待っている", photo: "/images/pht_hero_2.webp" },
+      { en: "Come on, let's run", ja: "さあ、走りだそう", photo: "/images/pht_hero_3.webp" },
+      { en: "Everywhere you want to be", ja: "あなたの目指す所へ", photo: "/images/pht_hero_4.webp" },
+      { en: "PLUS ULTRA", ja: "もっと先へ", photo: "/images/pht_hero_5.webp" },
     ]
   },
 {
