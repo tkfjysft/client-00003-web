@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 export const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   useEffect(() => {
     // 3秒後にローディングを完了させる
-    const timer = setTimeout(onComplete, 3000);
+    const timer = setTimeout(onComplete, 1100);
     return () => clearTimeout(timer);
   }, [onComplete]);
 
@@ -21,7 +21,7 @@ export const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     >
       {/* CIロゴのアニメーション */}
       <motion.img
-        src="c/images/ci_logo.svg" // ロゴのパス
+        src="/c/images/ci_logo.svg" // ロゴのパス
         alt="CI Logo"
         className="w-[200px] md:w-60" // サイズ調整
         

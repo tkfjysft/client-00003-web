@@ -126,9 +126,10 @@ export default function RootLayout({
       <Link href="/coating" className="hover:text-clr-primary-1 transition-colors">Coating</Link>
       <Link href="/maintenance" className="hover:text-clr-primary-1 transition-colors">Maintenance</Link>
       <Link href="/about" className="hover:text-clr-primary-1 transition-colors">About</Link>
+      <Link href="/about" className="hover:text-clr-primary-1 transition-colors">Access</Link>
       <Link href="/contact" className="hover:text-clr-primary-1 transition-colors">Contact</Link>
-      <Link href="/privacy" className="hover:text-clr-primary-1 transition-colors">Privacy Policy</Link>
-      <Link href="/terms" className="hover:text-clr-primary-1 transition-colors">Terms of Service</Link>
+      <Link href="/privacy" className="mt-4 hover:text-clr-primary-1 transition-colors text-sm">Privacy Policy</Link>
+      <Link href="/terms" className="hover:text-clr-primary-1 transition-colors text-sm">Terms of Service</Link>
     </div>
 
     {/* 右: コンタクト */}

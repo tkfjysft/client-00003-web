@@ -13,20 +13,23 @@ const MotionImage = motion(CustomImage);
 interface CarImageProps {
   activeSection: any; // 必要に応じて型を定義
   isHovered: boolean;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  onClick: () => void;
 }
 
-export default function CarImage({ activeSection, isHovered, onMouseEnter, onMouseLeave }: CarImageProps) {
+export default function CarImage({ activeSection, isHovered, onMouseEnter, onMouseLeave, onClick }: CarImageProps) {
   return (
     <>
 
           {/* 実車レイヤー（右下固定） */}
           <div
             className="fixed bottom-0 right-[6vw] z-30 cursor-pointer 
-             w-[50vw] md:w-[30vw] h-auto"
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
+             w-[50vw] md:w-[30vw] h-auto touch-manipulation
+			 "
+            // onMouseEnter={onMouseEnter}
+            // onMouseLeave={onMouseLeave}
+			onClick={onClick}
           >
             {/* <div className="w-[20vw] fixed top-[10%] p-8">
 				<p className="text-center">
@@ -46,7 +49,10 @@ export default function CarImage({ activeSection, isHovered, onMouseEnter, onMou
               />
               {/* </div> */}
 
-              <div className="relative w-full h-full z-10">
+              <div className="relative w-full h-full z-10
+			  transition-transform duration-500 hover:translate-y-2
+			 ease-out hover:scale-[0.98] active:scale-[0.96]
+			  ">
                 <AnimatePresence mode="wait">
                   {/* <div className="fixed inset-0 w-full h-full flex items-center justify-center p-20 z-0"> */}
 

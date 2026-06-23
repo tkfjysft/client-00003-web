@@ -5,24 +5,13 @@ import FloatingLogo from "@/components/FloatingLogo";
 
 export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
 
   
   return (
     <>
       <header className={`fixed top-0 w-full z-50 px-[8vw] py-12 flex justify-between items-center
-			${
-				isHeaderHovered ? 'bg-transparent' : 'bg-clr-base-1/50'
-			}`}
-			onMouseEnter={() => {
-    console.log("hovered");
-    setIsHeaderHovered(true);
-  }}
-  onMouseLeave={() => {
-    console.log("left");
-    setIsHeaderHovered(false);
-  }}
-
+	  bg-transparent md:bg-clr-base-1/50 transition-opacity duration-300
+			`}
 	  >
         
         {/* PC用ナビゲーション（md未満ではhidden） */}
@@ -37,7 +26,7 @@ export default function Header() {
 
         {/* スマホ用ハンバーガーボタン（md以上ではhidden） */}
         <button 
-          className="md:hidden text-clr-white z-50 p-2"
+          className="md:hidden text-clr-white z-50 p-2 mt-[-20px]"
           onClick={() => setIsDrawerOpen(true)}
         >
           MENU

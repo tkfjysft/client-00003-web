@@ -191,6 +191,23 @@ export default function Portfolio() {
   // 2. スクロールの後半（例：80%〜100%の間）でopacityを1から0に変える
   const opacity = useTransform(scrollYProgress, [0.99, 1], [1, 0]);
 
+
+  useEffect(() => {
+  // 1. ロードから1秒後に変化を開始
+  const timer1 = setTimeout(() => setIsHovered(true), 400);
+  
+  // 2. 変化してから2秒後に戻す
+  const timer2 = setTimeout(() => setIsHovered(false), 2000);
+
+  return () => {
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+  };
+}, []);
+
+
+
+
   return (
     <>
       <motion.div
@@ -275,8 +292,9 @@ export default function Portfolio() {
 		  <CarImage
 		  	activeSection={displayId} 
     		isHovered={isHovered}
-		  onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}
+		 	// onMouseEnter={() => setIsHovered(true)}
+  			// onMouseLeave={() => setIsHovered(false)}
+			onClick={() => setIsHovered(!isHovered)}
   		  />
 
         </div>
