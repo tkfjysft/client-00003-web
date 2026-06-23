@@ -90,27 +90,27 @@ export default function RootLayout({
           <Header />
           {children}
 <footer
-  className="relative text-clr-white w-full py-20 px-[6vw] mt-[20vh] md:mt-[100vh] contents-area overflow-hidden"
+  className="relative text-clr-white w-full py-20 px-[6vw] mt-[100vh] contents-area overflow-hidden"
 >
   {/* 背景レイヤー */}
   <div 
     className="absolute inset-0 z-0"
-    style={{
-      backgroundImage: "url(/c/images/bg_footer.webp)",
-      backgroundSize: "cover",
-      // 画像の左側を大きく見せるために 20% に変更
-      backgroundPosition: "20% center", 
-      maskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
-      WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
-    }}
+    // style={{
+    //   backgroundImage: "url(/c/images/bg_footer.webp)",
+    //   backgroundSize: "cover",
+    //   // 画像の左側を大きく見せるために 20% に変更
+    //   backgroundPosition: "20% center", 
+    //   maskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
+    //   WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
+    // }}
   />
 
   {/* コンテンツレイヤー：mx-auto を外し、左寄せにする */}
-  <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 p-6 md:p-12 bg-clr-base-1/80 w-full max-w-[1200px]">
+  <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 p-6 lg:p-12 w-full max-w-[1440px] mx-auto">
     
     {/* 左: ブランド */}
-    <div className="space-y-3 md:border-l md:pl-4 border-clr-white/30 text-sm md:text-base">
-      <h3 className="text-lg md:text-xl font-bold tracking-widest mb-4">
+    <div className="space-y-3 lg:border-l lg:pl-4 border-clr-white/30 text-base">
+      <h3 className="text-lg lg:text-xl font-bold tracking-widest mb-4">
         {siteConfig.companyName1} {siteConfig.companyName2}
       </h3>
       <p>〒{siteConfig.contact.postcode}</p>
@@ -122,7 +122,7 @@ export default function RootLayout({
     </div>
 
     {/* 中央: サイトマップ */}
-    <div className="flex flex-col space-y-3 md:space-y-4 text-sm md:text-base border-t md:border-t-0 md:border-l md:pl-4 pt-6 md:pt-0 uppercase tracking-[0.2em] border-clr-white/30">
+    <div className="flex flex-col space-y-3 lg:space-y-4 text-base border-t lg:border-t-0 lg:border-l lg:pl-4 pt-6 lg:pt-0 uppercase tracking-[0.2em] border-clr-white/30">
       <Link href="/coating" className="hover:text-clr-primary-1 transition-colors">Coating</Link>
       <Link href="/maintenance" className="hover:text-clr-primary-1 transition-colors">Maintenance</Link>
       <Link href="/about" className="hover:text-clr-primary-1 transition-colors">About</Link>
@@ -132,12 +132,12 @@ export default function RootLayout({
     </div>
 
     {/* 右: コンタクト */}
-    <div className="border-t md:border-t-0 md:border-l md:pl-4 pt-6 md:pt-0 border-clr-white/30">
+    <div className="border-t lg:border-t-0 lg:border-l lg:pl-4 pt-6 lg:pt-0 border-clr-white/30">
       <div className="w-full">
         <SnsLinks />
       </div>
 
-      <div className="mt-8 text-[10px] md:text-xs text-white/60">
+      <div className="mt-8 text-[10px] lg:text-xs text-white/60">
         &copy; 2026 {siteConfig.enCompamyName1}{" "}
         {siteConfig.enCompamyName2} Inc. All Rights Reserved.
       </div>

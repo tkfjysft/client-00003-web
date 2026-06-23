@@ -31,6 +31,7 @@ export default function Header() {
           <Link href="/coating" className="hover:text-clr-white transition">Coating</Link>
           <Link href="/maintenance" className="hover:text-clr-white transition">Maintenance</Link>
           <Link href="/about" className="hover:text-clr-white transition">About</Link>
+          <Link href="/access" className="hover:text-clr-white transition">access</Link>
           <Link href="/contact" className="hover:text-clr-white transition">Contact</Link>
         </nav>
 
@@ -53,6 +54,7 @@ export default function Header() {
           <Link href="/coating" onClick={() => setIsDrawerOpen(false)}>Coating</Link>
           <Link href="/maintenance" onClick={() => setIsDrawerOpen(false)}>Maintenance</Link>
           <Link href="/about" onClick={() => setIsDrawerOpen(false)}>About</Link>
+          <Link href="/access" onClick={() => setIsDrawerOpen(false)}>access</Link>
           <Link href="/contact" onClick={() => setIsDrawerOpen(false)}>Contact</Link>
         </div>
       </div>

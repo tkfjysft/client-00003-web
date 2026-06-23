@@ -26,11 +26,11 @@ export const SECTIONS: SectionType[] = [
     id: 1,
     type: "hero",
     items: [
-      { en: "The best choice for the best one", ja: "最高の１台のために最高の選択を", photo: "/images/pht_hero_1.webp" },
-      { en: "Cars all over the world are waiting for you", ja: "世界中の車があなたを待っている", photo: "/images/pht_hero_2.webp" },
-      { en: "Come on, let's run", ja: "さあ、走りだそう", photo: "/images/pht_hero_3.webp" },
-      { en: "Everywhere you want to be", ja: "あなたの目指す所へ", photo: "/images/pht_hero_4.webp" },
-      { en: "PLUS ULTRA", ja: "もっと先へ", photo: "/images/pht_hero_5.webp" },
+      { en: "The best choice for the best one", ja: "最高の１台のために最高の選択を", photo: "/images/hero_1.webp" },
+      { en: "Cars all over the world are waiting for you", ja: "世界中の車があなたを待っている", photo: "/images/hero_2.webp" },
+      { en: "Come on, let's run", ja: "さあ、走りだそう", photo: "/images/hero_3.webp" },
+      { en: "Everywhere you want to be", ja: "あなたの目指す所へ", photo: "/images/hero_4.webp" },
+      { en: "PLUS ULTRA", ja: "もっと先へ", photo: "/images/hero_5.webp" },
     ]
   },
 {

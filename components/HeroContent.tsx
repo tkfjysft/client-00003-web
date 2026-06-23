@@ -34,11 +34,12 @@ export default function HeroSection() {
 
           </div>
 
-		  			<div className="relative mt-40 w-[50vw] h-[50vw] md:w-[30vw] md:h-[30vw] aspect-video overflow-hidden"
+		  			<div className="relative ml-[10vw] mt-[10vw] w-[50vw] h-[50vw] md:w-[30vw] md:h-[30vw]
+					aspect-video overflow-hidden rounded-sm border border-clr-primary-1/30 shadow-2xl"
 							style={{
-							// borderRadius: '50%',
-							WebkitMaskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)',
-							maskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)'
+							borderRadius: '5%',
+							// WebkitMaskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)',
+							// maskImage: 'radial-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0) 70%)'
 				}}
 			>
 			<CustomImage
