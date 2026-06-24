@@ -7,6 +7,7 @@ export default function Header() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   
+  
   return (
     <>
       <header className={`fixed top-0 w-full z-50 px-[8vw] py-12 flex justify-between items-center
