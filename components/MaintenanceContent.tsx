@@ -9,7 +9,6 @@ export default function MaintenanceContent() {
   return (
 <div className="h-full flex flex-col justify-start px-[6vw] py-20 mb-[20vh] contents-area md:mb-[100vh]">
 
-  {/* ヘッダー */}
   <div className="mb-16 border-l-[3px] border-clr-primary-1 pl-6 md:pl-8 mb-20 md:mb-40">
     <h2 className="text-[2rem] md:text-[5rem] lg:text-9xl uppercase leading-[1.1] text-gradient break-words">
       {data.title}
@@ -37,7 +36,7 @@ export default function MaintenanceContent() {
       </p>
     </div>
 
-    {/* ステップフロー */}
+
     <div className="grid grid-cols-1 gap-6 md:gap-24">
       {data.steps.map((step: any) => (
         <Link 

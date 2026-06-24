@@ -92,23 +92,16 @@ export default function RootLayout({
 <footer
   className="relative text-clr-white w-full py-20 px-[6vw] mt-[100vh] contents-area overflow-hidden"
 >
-  {/* 背景レイヤー */}
+
   <div 
     className="absolute inset-0 z-0"
-    // style={{
-    //   backgroundImage: "url(/c/images/bg_footer.webp)",
-    //   backgroundSize: "cover",
-    //   // 画像の左側を大きく見せるために 20% に変更
-    //   backgroundPosition: "20% center", 
-    //   maskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
-    //   WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 60%)",
-    // }}
+
   />
 
-  {/* コンテンツレイヤー：mx-auto を外し、左寄せにする */}
+ 
   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 p-6 lg:p-12 w-full max-w-[1440px] mx-auto">
     
-    {/* 左: ブランド */}
+
     <div className="space-y-3 lg:border-l lg:pl-4 border-clr-white/30 text-base">
       <h3 className="text-lg lg:text-xl font-bold tracking-widest mb-4">
         {siteConfig.companyName1} {siteConfig.companyName2}
@@ -121,7 +114,7 @@ export default function RootLayout({
       <p>営業時間: 10:00 - 19:00 (定休日: 火曜)</p>
     </div>
 
-    {/* 中央: サイトマップ */}
+
     <div className="flex flex-col space-y-3 lg:space-y-4 text-base border-t lg:border-t-0 lg:border-l lg:pl-4 pt-6 lg:pt-0 uppercase tracking-[0.2em] border-clr-white/30">
       <Link href="/coating" className="hover:text-clr-primary-1 transition-colors">Coating</Link>
       <Link href="/maintenance" className="hover:text-clr-primary-1 transition-colors">Maintenance</Link>
@@ -132,7 +125,7 @@ export default function RootLayout({
       <Link href="/terms" className="hover:text-clr-primary-1 transition-colors text-sm">Terms of Service</Link>
     </div>
 
-    {/* 右: コンタクト */}
+
     <div className="border-t lg:border-t-0 lg:border-l lg:pl-4 pt-6 lg:pt-0 border-clr-white/30">
       <div className="w-full">
         <SnsLinks />

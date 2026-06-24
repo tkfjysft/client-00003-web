@@ -26,21 +26,12 @@ import CarImage from "../components/CarImage";
 import Lenis from "lenis";
 import { useMotionValueEvent } from "framer-motion";
 
-// const carConfig: Record<string, { matrix: string, offsetY: string }> = {
-//   "1": {
-//     // matrix3d(a,b,c,d, e,f,g,h, i,j,k,l, m,n,o,p)
-//     // この数値をいじることで、四隅を個別に引っ張れます
-//     matrix: "matrix3d(1, 0.15, 0, 0,  -0.2, 0.7, 0, 0,  0, 0, 1, 0,  0, 0, 0, 1)",
-//     offsetY: "-50%"
-//   },
-// };
 
 type CarInfo = {
   name: string;
   trivia: string;
 };
 
-// 2. carData にその型を適用します
 const carData: Record<string, CarInfo> = {
   "1": {
     name: "Ferrari 458 Italia",
@@ -68,15 +59,11 @@ export default function Portfolio() {
     const container = containerRef.current;
     if (!container) return;
 
-    // 最初の一回だけ計算して固定する（何度も setPageHeight しない）
     const height = container.scrollHeight;
     setPageHeight(height);
 
-    // ResizeObserver は今回の場合、逆にスクロール位置を狂わせる原因になるので
-    // 一度高さが決まったら更新しないようにするか、計算方法を検討してください。
   }, []);
 
-  // スクロール量の取得
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -91,7 +78,6 @@ export default function Portfolio() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // マウント時に少しだけ遅延させることで、ブラウザの初期スクロール位置検知を回避
     const timer = setTimeout(() => setIsReady(true), 100);
     return () => clearTimeout(timer);
   }, []);
@@ -99,19 +85,17 @@ export default function Portfolio() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsInitialLoad(false);
-    }, 1000); // 1秒間は判定を無視する
+    }, 1000); 
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    // Lenisの初期化
     const lenis = new Lenis({
-      duration: 1.2, // スクロールの継続時間
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Appleのような自然なイージング
-      smoothWheel: true, // マウスホイールの滑らか化
+      duration: 1.2, 
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      smoothWheel: true, 
     });
 
-    // アニメーションループの作成
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -119,36 +103,14 @@ export default function Portfolio() {
 
     requestAnimationFrame(raf);
 
-    // クリーンアップ処理（コンポーネントが消える時にLenisを止める）
     return () => lenis.destroy();
   }, []);
 
   const [isScrolling, setIsScrolling] = useState(false);
 
-  // スクロール位置に応じてセクション番号を算出 (5セクションの場合)
-  // scrollYProgress(0〜1)を 1〜5 に変換
-  // ※この数値はセクションの高さ調整で微調整可能です
-  //   const section = useTransform(scrollYProgress,
-  //       [0, 0.15, 0.35, 0.55, 0.75],
-  //       [1, 2, 3, 4, 5]);
 
-  // 値の変更を検知して state を更新
-  // useMotionValueEvent(section, "change", (latest) => {
-  //   const newSection = Math.round(latest);
-  //   if (activeSection !== newSection) {
-  //     setActiveSection(newSection);
-  //   }
-  // });
 
-  // useMotionValueEvent(section, "change", (latest) => {
-  //   // ★重要：クリック移動中は、スクロール位置による自動更新を完全に無視する
-  //   if (isScrolling) return;
 
-  //   const newSection = Math.round(latest);
-  //   if (activeSection !== newSection) {
-  //     setActiveSection(newSection);
-  //   }
-  // });
 
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
@@ -177,11 +139,9 @@ export default function Portfolio() {
 
     const element = document.getElementById(`section-${id}`);
     if (element) {
-      // smooth ではなく auto で瞬間移動させる
       element.scrollIntoView({ behavior: "smooth" });
     }
 
-    // 少し待ってからロックを解除
     setTimeout(() => {
       setIsScrolling(false);
     }, 1000);
@@ -189,15 +149,12 @@ export default function Portfolio() {
 
   const currentCar = carData[String(activeSection)] || carData["1"];
 
-  // 2. スクロールの後半（例：80%〜100%の間）でopacityを1から0に変える
   const opacity = useTransform(scrollYProgress, [0.99, 1], [1, 0]);
 
 
   useEffect(() => {
-  // 1. ロードから1秒後に変化を開始
   const timer1 = setTimeout(() => setIsHovered(true), 400);
   
-  // 2. 変化してから2秒後に戻す
   const timer2 = setTimeout(() => setIsHovered(false), 2000);
 
   return () => {
@@ -217,14 +174,12 @@ export default function Portfolio() {
         }}
       >
         <div ref={containerRef} className="relative w-full">
-          {/* 背景層（固定） */}
           <div className="fixed inset-0 z-0">
             <div className="relative w-full h-full">
               <AnimatePresence initial={false}>
                 {isHovered ? (
-                  // 都市夜景（ホバー時）：セクションごとの夜景画像
                   <motion.div
-                    key={`city-bg-${displayId}`} // セクションごとにユニークなキーにする
+                    key={`city-bg-${displayId}`} 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -232,22 +187,19 @@ export default function Portfolio() {
                     className="absolute inset-0 z-0"
                   >
                     <CustomImage
-                      src={`/images/bg_section_${displayId}.webp`} // 以前の命名規則に合わせました
+                      src={`/images/bg_section_${displayId}.webp`} 
                       alt="City Night"
                       fill
                       sizes="100vw"
                       priority
                       style={{
                         objectFit: "cover",
-                        filter: "brightness(1.5)", // 明度を50%にし、コントラストを上げる
+                        filter: "brightness(1.5)", 
                       }}
                     />
-                    {/* <div 
-    className="absolute inset-0 bg-[#001a4d] mix-blend-multiply opacity-60" 
-  /> */}
+
                   </motion.div>
                 ) : (
-                  // 黒背景（通常時）
                   <motion.div
                     key="black-bg"
                     initial={{ opacity: 0 }}
@@ -261,7 +213,6 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* コンテンツ層 */}
           <div className="relative z-20 h-auto">
             {SECTIONS.map((section: SectionType) => (
               <div id={`section-${section.id}`} key={section.id}>
@@ -288,13 +239,10 @@ export default function Portfolio() {
             ))}
           </div>
 
-		  {/* 車両画像層 */}
 		  
 		  <CarImage
 		  	activeSection={displayId} 
     		isHovered={isHovered}
-		 	// onMouseEnter={() => setIsHovered(true)}
-  			// onMouseLeave={() => setIsHovered(false)}
 			onClick={() => setIsHovered(!isHovered)}
   		  />
 
@@ -310,40 +258,5 @@ export default function Portfolio() {
   );
 }
 
-// 		<div className="absolute top-0 w-full h-1/2">
-// 		<MotionImage
-// 			src={`/images/car_section_${activeSection}.png`}
-// 			alt={`Car section ${activeSection}`}
-// 			fill
-// 			sizes="100vw"
-// 			priority
-// 			// ズーム演出はここに記述
-// 			initial={{ opacity: 0, scale: 0.95 }}
-// 			animate={{ opacity: 1, scale: 1 }}
-// 			exit={{ opacity: 0, scale: 1.05 }}
-// 			// ここを調整！
-// 			transition={{
-// 				duration: 0.8, // 出現時の時間はそのまま
-// 				ease: [0.22, 1, 0.36, 1],
-// 				exit: {
-// 				duration: 0.3, // 消える時は0.3秒でサッと消す
-// 				ease: "easeIn" // 消える時は直線的に消すとキレが出る
-// 				}
-//   			}}
-// 			style={{ objectFit: "contain" }}
-// 		/>
-// 		</div>
-// <div
-//   className="absolute top-1/2 w-full h-1/2"
-// >
-// <motion.img
-//   src={`/c/images/car_section_${activeSection}.png`}
-//   alt="Reflection"
-//   className="w-full h-full object-contain object-top opacity-30"
-// style={{
-//   transform: `scaleY(-1) ${carConfig[String(activeSection)]?.matrix} translateY(${carConfig[String(activeSection)]?.offsetY})`,
-//   transformOrigin: 'top center',
-// }}
 
-// />
-// </div>
+

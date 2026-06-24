@@ -8,7 +8,6 @@ export default function FloatingLogo() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // requestAnimationFrameを使うことで、ブラウザが再描画する直前の最新状態で計算させる
       requestAnimationFrame(() => {
         const contentAreas = Array.from(document.querySelectorAll('.contents-area'));
         const screenCenter = window.innerHeight / 2;
@@ -16,7 +15,6 @@ export default function FloatingLogo() {
 
         const isOverlapping = contentAreas.some((element) => {
           const rect = element.getBoundingClientRect();
-          // rect.top 等が 0 になっていないか確認するためのガード
           if (rect.top === 0 && rect.bottom === 0) return false;
 
           return rect.top < (screenCenter + logoHalfHeight) && rect.bottom > (screenCenter - logoHalfHeight);
@@ -26,10 +24,8 @@ export default function FloatingLogo() {
       });
     };
 
-    // スクロール時
     window.addEventListener('scroll', handleScroll);
     
-    // ロード直後の判定を確実にするため、少し時間をずらして何度か試す
     const intervals = [100, 300, 600].map(delay => setTimeout(handleScroll, delay));
 
     return () => {
@@ -39,10 +35,9 @@ export default function FloatingLogo() {
   }, []);
 
 
-const pathname = usePathname(); // 現在のパスを取得
+const pathname = usePathname(); 
 
   useEffect(() => {
-    // 判定ロジックを関数化
     const handleScroll = () => {
       const contentAreas = Array.from(document.querySelectorAll('.contents-area'));
       const screenCenter = window.innerHeight / 2;
@@ -57,11 +52,10 @@ const pathname = usePathname(); // 現在のパスを取得
 
     window.addEventListener('scroll', handleScroll);
     
-    // パスが変わった（トップに戻ってきた）時と、マウント時に実行
     handleScroll(); 
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]); // 依存配列に pathname を追加！
+  }, [pathname]); 
 
 
 

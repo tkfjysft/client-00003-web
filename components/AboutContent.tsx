@@ -9,7 +9,6 @@ export default function AboutContent() {
   return (
 <div className="h-full flex flex-col justify-start px-[6vw] py-20 mb-[20vh] contents-area md:mb-[100vh]">
 
-  {/* ヘッダー */}
   <div className="mb-16 border-l-[3px] border-clr-primary-1 pl-6 md:pl-8 mb-20 md:mb-40">
     <h2 className="text-[2rem] md:text-[5rem] lg:text-9xl uppercase leading-[1.1] text-gradient break-words">
       {data.title}
@@ -19,7 +18,6 @@ export default function AboutContent() {
     </p>
   </div>
 
-  {/* コンテンツエリア */}
   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-16 items-start w-full md:max-w-[80vw] bg-clr-base-1/70 p-6 md:p-8 backdrop-blur-md">
     
     <div className="relative w-full aspect-video overflow-hidden rounded-sm border border-clr-primary-1/30 shadow-2xl">

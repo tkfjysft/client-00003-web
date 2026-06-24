@@ -1,15 +1,12 @@
-// GroundPlane.tsx
 
 import { motion } from "framer-motion";
 import EdgeLine from "@/components/EdgeLine";
 
 interface GroundPlaneProps {
-  // 数値で受け取るように変更（型エラーを解消するため）
   activeSection: number;
   isHovered: boolean;
 }
 
-// 設定のキーを数値から生成するための型
 type CarType =
   | "car_section_1"
   | "car_section_2"
@@ -17,7 +14,6 @@ type CarType =
   | "car_section_4"
   | "car_section_5";
 
-// 型を定義
 type GroundConfig = {
   scaleY: number;
   skewX: number;
@@ -38,7 +34,6 @@ export default function GroundPlane({
   activeSection,
   isHovered,
 }: GroundPlaneProps) {
-  // 数値からキー文字列（"car_section_1"など）を動的に生成
   const key = `car_section_${activeSection}` as CarType;
   const config = carGroundConfigs[key] || carGroundConfigs.car_section_1;
 
@@ -61,8 +56,6 @@ export default function GroundPlane({
 				? 'linear-gradient(to right, #000000 60%, transparent 100%), linear-gradient(to top, #00000000 20%, transparent 100%)'
 				: 'linear-gradient(to right, #00000030 10%, transparent 100%), linear-gradient(to top, #00000030 20%, transparent 100%)',
 
-    // transformOrigin: "top center",
-    // transform: `scaleY(2) skewX(-83deg) translateY(${isHovered ? "-10px" : "0px"})`,
   }}
 >
   <EdgeLine isHovered={isHovered} />

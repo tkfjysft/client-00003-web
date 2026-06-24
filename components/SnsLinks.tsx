@@ -29,11 +29,3 @@ export default function SnsLinks() {
 }
 
 
-        // <a 
-        //   key={sns.label}
-        //   href={sns.href}
-        //   target="_blank"
-        //   rel="noopener noreferrer"
-        //   aria-label={sns.label}
-        //   className="group text-clr-base-1 transition-all duration-300"
-        // >

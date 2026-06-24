@@ -4,17 +4,17 @@ export type SectionType = {
   id: number;
   type: "ci" |"hero" | "message" | "coating" | "maintenance" | "about";
   title?: string;
-  subtitle?: string; // 追加
-  photo?: string;    // 追加
-  intro?: string;    // 追加
-  description?: string; // 追加
+  subtitle?: string; 
+  photo?: string;    
+  intro?: string;    
+  description?: string; 
   body?: string;
   items?: { en: string; ja: string; photo: string }[];
   links?: { label: string; href: string }[];
   steps?: { id: string; title: string; label: string; text: string; link: string }[];
-  details?: { label: string; text: string }[]; // 追加
-  footer?: string;   // 追加
-  features?: { title: string; text: string }[]; // 追加
+  details?: { label: string; text: string }[]; 
+  footer?: string;   
+  features?: { title: string; text: string }[]; 
 };
 
 export const SECTIONS: SectionType[] = [

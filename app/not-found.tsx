@@ -11,16 +11,7 @@ export default function NotFound() {
       
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-clr-primary-1/5 blur-[120px] rounded-full pointer-events-none" />
 
-{/* <div className="absolute top-4 left-[2vw] sm:top-10 sm:left-[4vw] w-full max-w-[200px] sm:max-w-[300px] flex flex-col items-center pointer-events-auto">
-  <Link href="/" className='block w-full h-full relative z-[10001]'>
-        <div 
-      className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-40 transition-opacity duration-700 ease-in-out
-        opacity-100`}
-    >
-      <img src="/c/images/ci_logo.svg" alt="CI Logo" className="w-[200px] md:w-60 h-auto" />
-    </div>
-  </Link>
-</div> */}
+
 
       <div className="relative z-10 text-center max-w-md">
         <p className="text-clr-primary-1 font-mono text-xs tracking-[0.3em] uppercase mb-4">

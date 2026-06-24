@@ -6,14 +6,10 @@ export default function MessageContent() {
   if (!data) return null;
 
   return (
-    // justify-center を削除し、items-start (左上寄せ) に変更
-    // mx-auto を削除し、左寄せを強制します
 
 <div className="h-full flex flex-col justify-start px-[6vw] py-20 mb-[20vh] contents-area md:mb-[100vh]">
 
-  {/* タイトルエリア */}
   <div className="mb-16 border-l-[3px] border-clr-primary-1 pl-6 md:pl-8 mb-20 md:mb-40"> 
-    {/* フォントサイズを段階的に調整。!leading-noneはスマホで見やすい程度に */}
     <h2 className="text-[2rem] md:text-[5rem] lg:text-9xl uppercase leading-[1.1] text-gradient break-words">
       {data.title}
     </h2>
@@ -22,7 +18,6 @@ export default function MessageContent() {
     </p>
   </div>
 
-  {/* コンテンツグリッド: md未満では縦積み(1fr)、md以上で横並び */}
   <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-8 md:gap-16 items-start w-full md:max-w-[80vw] bg-clr-base-1/70 p-6 md:p-8 backdrop-blur-md mb-20 md:mb-40">
     
     <div className="relative w-full aspect-video overflow-hidden rounded-sm border border-clr-primary-1/30 shadow-2xl">
@@ -56,7 +51,6 @@ export default function MessageContent() {
     </div>
   </div>
 
-  {/* フッターエリア */}
   <div className="mt-8 pt-8 border-t border-clr-primary-1/20 w-full max-w-[1200px]">
     <p className="text-[#C0C0C0] text-sm md:text-lg italic font-light tracking-wide leading-relaxed">
       {data.footer}

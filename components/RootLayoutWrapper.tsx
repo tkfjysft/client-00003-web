@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { LoadingScreen } from '@/components/LoadingScreen'; // 必要に応じてファイルを分けてください
+import { LoadingScreen } from '@/components/LoadingScreen'; 
 
 export default function RootLayoutWrapper({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
